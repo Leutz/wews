@@ -1,66 +1,230 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 body {
-  font-family: "Lato", sans-serif;
-  transition: background-color .5s;
+    /*    font-family: "Lato", sans-serif;*/
+    font-family: 'Roboto', sans-serif;
+
+    /*transition: background-color .5s;*/
+    background-color: rgb(255, 232, 218);
 }
 
+/* Side Navigation */
 .sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #150a00;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 30px;
 }
 
-.sidenav img{
+.sidenav img {
     width: 128px;
-    margin-left: 0px;
     padding: 10px 50px 25px 50px;
 }
 
-.sidenav a {
-  padding: 2px 50px 2px 30px;
-    margin: 20px 5px 5px 50px;
-  text-decoration: none;
-  border-style:solid;
-  border-width: 0px 0px 0px 2px;
-  border-color: rgb(160, 160, 160);
-  font-size: 16px;
-  color: rgb(160, 160, 160);
-  display: block;
-  transition: 0.3s;
+.sidenav .alink {
+    padding: 5px 0px 5px 20px;
+    text-decoration: none;
+    border-color: rgb(160, 160, 160);
+    font-size: 16px;
+    color: rgb(160, 160, 160);
+    display: block;
+    transition: 0.3s;
+
+    text-transform: capitalize;
+}
+
+.sidenav .blink {
+    padding-left: 10px;
+    margin: 10px 10px 10px 20px;
+    text-decoration: none;
+    border-style: solid;
+    border-width: 0px 0px 0px 2px;
+    border-color: rgb(160, 160, 160);
+    font-size: 16px;
+    color: rgb(160, 160, 160);
+    display: block;
+    transition: 0.3s;
+
+    text-transform: capitalize;
+}
+
+.sidenav a img {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0px;
+    width: 15%;
 }
 
 .sidenav a:hover {
-  color: #ffab57;
-  border-color: #ffab57;
+    color: #ffab57;
+    border-color: #ffab57;
 }
 
 .sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  border-style:none;
-  right: 0px;
-  font-size: 36px;
-  padding: 0px 16px 0px 0px;
-    float: right;
+    position: absolute;
+    color: white;
+    right: 10px;
+    top: 5px;
+    font-size: 40px;
+    text-decoration-line: none;
 }
 
-.sidenav .closebtn:hover{
-    color: #ff7272;
+.sidenav .closebtn:hover {
+    color: #ffab57;
 }
+
+/* Top Navigation */
+
+#topNav {
+    display: inline-flex;
+
+}
+
+#topNav .tlink {
+    background-color: rgb(255, 232, 218);
+    margin: 10px 0px 10px 30px;
+}
+
+#topNav .tlink:hover {
+    background-color: darkorange;
+    border-radius: 30%;
+
+}
+
+#topNav img {
+    width: 30px;
+
+}
+
+/* Main */
 
 #main {
-  transition: margin-left .5s;
-  padding: 16px;
-    
+    transition: margin-left .5s;
 }
 
+
+
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+
+/* Articles container */
+#news {
+    display: flex;
+    flex-flow: wrap;
+    /* align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;*/
+    justify-content: center;
+}
+
+/* Article*/
+#news article {
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0), 0 6px 20px 0 rgb(142, 142, 142);
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    color: white;
+    position: relative;
+}
+
+.article {
+    margin: 10px;
+    background-color: #ffab57;
+}
+
+.article img {
+    width: 100%;
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+}
+
+.readBtn {
+    background-color: #ffffff;
+    width: 100px;
+    height: 35px;
+    color: black;
+    padding: 0px;
+    font-variant-caps: ;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    color: #ffab57;
+}
+
+.readBtn:hover {
+    background: #ffab57;
+    color: white;
+}
+
+
+/* Article holding the image and the text */
+.article {
+    box-shadow: 4px 10px 20px 0 rgba(42, 42, 42, 0.66)
+        /*, 0 10px 10px 10px8 rgba(0, 0, 0, 0.9)*/
+    ;
+    position: relative;
+    text-align: center;
+    color: white;
+    width: 500px;
+}
+
+.top-left {
+    position: absolute;
+    top: -8px;
+    left: 10px;
+}
+
+.top-left img {
+    width: 60px;
+}
+
+/* Top right "READ" button */
+.top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    height: 50%;
+}
+
+/* Bottom panel, containing the title of the article, and a quote or beggining of it */
+.bottom {
+    background-color: rgba(0, 0, 0, 0.69);
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    bottom: 5px;
+}
+
+.bottom h4 {
+    text-transform: uppercase;
+}
+
+.bottom p,
+h4 {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
