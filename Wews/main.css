@@ -1,51 +1,58 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 body {
-    /*    font-family: "Lato", sans-serif;*/
     font-family: 'Roboto', sans-serif;
-
-    /*transition: background-color .5s;*/
-    background-color: rgb(255, 232, 218);
+    background-image: url(graphics/back_light.png);
+    background-repeat: repeat;
 }
 
+* {
+    box-sizing: border-box;
+}
+
+
+
+
+
 /* Side Navigation */
+
 .sidenav {
     display: flex;
     flex-direction: column;
+    width: 0px;
     flex-wrap: nowrap;
     justify-content: flex-start;
     height: 100%;
-    width: 0;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #150a00;
+    background-color: #272422;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 30px;
 }
 
 .sidenav img {
-    width: 128px;
-    padding: 10px 50px 25px 50px;
+    width: 60%;
+    align-self: center;
+    padding: 40px 0px;
 }
 
 .sidenav .alink {
-    padding: 5px 0px 5px 20px;
     text-decoration: none;
+    padding: 10px 0px 10px 20px;
     border-color: rgb(160, 160, 160);
     font-size: 16px;
     color: rgb(160, 160, 160);
     display: block;
     transition: 0.3s;
-
+    font-size: 20px;
     text-transform: capitalize;
 }
 
 .sidenav .blink {
-    padding-left: 10px;
-    margin: 10px 10px 10px 20px;
+    margin: 5px 0px 5px 25px;
+    padding: 10px 10px 10px 20px;
     text-decoration: none;
     border-style: solid;
     border-width: 0px 0px 0px 2px;
@@ -53,6 +60,7 @@ body {
     font-size: 16px;
     color: rgb(160, 160, 160);
     display: block;
+    font-size: 18px;
     transition: 0.3s;
 
     text-transform: capitalize;
@@ -61,11 +69,13 @@ body {
 .sidenav a img {
     display: inline-block;
     vertical-align: middle;
-    padding: 0px;
+    padding: 0px 10px 0px 0px;
+    ;
     width: 15%;
 }
 
 .sidenav a:hover {
+    background-color: #171717;
     color: #ffab57;
     border-color: #ffab57;
 }
@@ -83,28 +93,39 @@ body {
     color: #ffab57;
 }
 
+
+
 /* Top Navigation */
 
 #topNav {
     display: inline-flex;
-
+    align-items: center;
 }
 
-#topNav .tlink {
-    background-color: rgb(255, 232, 218);
-    margin: 10px 0px 10px 30px;
+#topNav span {
+    font-size: 30px;
+    cursor: pointer
 }
 
-#topNav .tlink:hover {
-    background-color: darkorange;
-    border-radius: 30%;
-
+#topNav .tlink img {
+    margin: 20px 0px 10px 20px;
+    ;
 }
 
 #topNav img {
     width: 30px;
-
 }
+
+#topNav input {
+    margin-left: 15px;
+    border-radius: 5px;
+    width: 300px;
+    height: 25px;
+    text-align: center;
+    border-style: none;
+    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.28);
+}
+
 
 /* Main */
 
@@ -114,26 +135,68 @@ body {
 
 
 
-@media screen and (max-height: 450px) {
-    .sidenav {
-        padding-top: 15px;
-    }
 
-    .sidenav a {
-        font-size: 18px;
-    }
+/* Header */
+
+.header {
+    padding-left: 50px;
+    padding-top: 5px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 5px;
+    border-style: none;
+    color: #000000;
+    text-shadow: 2px 2px 20px #ffffff, 2px 2px 0px #ffffff;
+    box-shadow: 0px 15px 20px 0px rgba(255, 255, 255, 0.65);
 }
+
+
 
 
 /* Articles container */
 #news {
-    display: flex;
-    flex-flow: wrap;
-    /* align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;*/
-    justify-content: center;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+.column {
+    flex: 25%;
+    max-width: 25%;
+}
+
+.column .article {}
+
+@media (max-width: 1500px) {
+    .column {
+        flex: 50%;
+        max-width: 50%;
+    }
+
+    #news {
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .column {
+        flex: 100%;
+        max-width: 100%;
+    }
+
+    #topNav input {
+        width: 160px;
+    }
+}
+
+
+
 
 /* Article*/
 #news article {
@@ -147,10 +210,10 @@ body {
 .article {
     margin: 10px;
     background-color: #ffab57;
-}
-
-.article img {
-    width: 100%;
+    box-shadow: 0px 5px 12px 0 rgb(42, 42, 42);
+    position: relative;
+    text-align: center;
+    color: white;
 }
 
 .bottom-left {
@@ -160,34 +223,28 @@ body {
 }
 
 .readBtn {
-    background-color: #ffffff;
-    width: 100px;
-    height: 35px;
-    color: black;
-    padding: 0px;
-    font-variant-caps: ;
+    background-color: #ffbd0a;
+    box-shadow: 0px 5px 12px 0 rgb(42, 42, 42);
+    border-style: none;
+    width: 90px;
+    height: 30px;
     font-size: 16px;
     text-align: center;
     cursor: pointer;
-    color: #ffab57;
+    color: #000000;
+
 }
 
 .readBtn:hover {
-    background: #ffab57;
-    color: white;
+    background: #ffbd0a;
+    color: #ffffff;
+    box-shadow: 0px 1px 8px 0 rgb(255, 158, 61);
 }
+
+
 
 
 /* Article holding the image and the text */
-.article {
-    box-shadow: 4px 10px 20px 0 rgba(42, 42, 42, 0.66)
-        /*, 0 10px 10px 10px8 rgba(0, 0, 0, 0.9)*/
-    ;
-    position: relative;
-    text-align: center;
-    color: white;
-    width: 500px;
-}
 
 .top-left {
     position: absolute;
@@ -199,6 +256,8 @@ body {
     width: 60px;
 }
 
+
+
 /* Top right "READ" button */
 .top-right {
     position: absolute;
@@ -207,9 +266,11 @@ body {
     height: 50%;
 }
 
+
+
 /* Bottom panel, containing the title of the article, and a quote or beggining of it */
 .bottom {
-    background-color: rgba(0, 0, 0, 0.69);
+    background-color: rgba(0, 0, 0, 0.78);
     width: 100%;
     padding: 0;
     margin: 0;
@@ -219,12 +280,11 @@ body {
 
 .bottom h4 {
     text-transform: uppercase;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .bottom p,
 h4 {
-    padding: 0;
+    padding: 10px 2px;
     margin: 0;
-    margin-bottom: 10px;
-    margin-top: 10px;
 }
