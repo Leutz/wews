@@ -4,7 +4,9 @@
 .container {
   padding: 16px;
 }
-body {background-color: #00FFFF;}
+body {background-color: #00FFFF;
+  background-image: url(../Wews/graphics/back_light.png);
+    background-repeat: repeat;}
 
 /* Full-width input fields */
 input[type=text], input[type=password] {
