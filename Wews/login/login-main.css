@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("../Wews/graphics/back_light.png");
+    background-repeat: repeat;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form {
+    border: 3px solid #f1f1f1;
+    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.28);
+}
+
+
+.container {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+label {
+    padding: 10px;
+}
+
+.imgcontainer {
+    text-align: center;
+}
+
+.imgcontainer img {
+    width: 150px;
+}
+
+input[type=text],
+input[type=password] {
+    width: 500px;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    border-radius: 5px;
+    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.28);
+
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 500px;
+    opacity: 0.9;
+    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.28);
+
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+    button {
+        width: 90%;
+    }
+
+    a {
+        width: 90%;
+    }
+
+    a button {
+        width: 100%;
+    }
+
+
+    input[type=text],
+    input[type=password] {
+        width: 90%;
+
+    }
+
+    body {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+
+@media (max-width: 1200px) {
+    body {
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+span.psw {
+    float: none;
+    padding-top: 16px;
+}

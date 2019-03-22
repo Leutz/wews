@@ -173,14 +173,14 @@ body {
 
 .column .article {}
 
-@media (max-width: 1500px) {
+@media (max-width: 1400px) {
     .column {
         flex: 50%;
         max-width: 50%;
     }
 
     #news {
-        width: 100%;
+        width: 90%;
     }
 }
 
@@ -192,6 +192,10 @@ body {
 
     #topNav input {
         width: 160px;
+    }
+
+    #news {
+        width: 100%;
     }
 }
 
