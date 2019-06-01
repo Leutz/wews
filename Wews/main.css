@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url(graphics/back_light.png);
+    background-repeat: repeat;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+
+
+/* Side Navigation */
+
+.sidenav {
+    display: flex;
+    flex-direction: column;
+    width: 0px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #272422;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.sidenav img {
+    width: 60%;
+    align-self: center;
+    padding: 40px 0px;
+}
+
+.sidenav .alink {
+    text-decoration: none;
+    padding: 10px 0px 10px 20px;
+    border-color: rgb(160, 160, 160);
+    font-size: 16px;
+    color: rgb(160, 160, 160);
+    display: block;
+    transition: 0.3s;
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.sidenav .blink {
+    margin: 5px 0px 5px 25px;
+    padding: 10px 10px 10px 20px;
+    text-decoration: none;
+    border-style: solid;
+    border-width: 0px 0px 0px 2px;
+    border-color: rgb(160, 160, 160);
+    font-size: 16px;
+    color: rgb(160, 160, 160);
+    display: block;
+    font-size: 18px;
+    transition: 0.3s;
+
+    text-transform: capitalize;
+}
+
+.sidenav a img {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0px 10px 0px 0px;
+    ;
+    width: 15%;
+}
+
+.sidenav a:hover {
+    background-color: #171717;
+    color: #ffab57;
+    border-color: #ffab57;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    color: white;
+    right: 10px;
+    top: 5px;
+    font-size: 40px;
+    text-decoration-line: none;
+}
+
+.sidenav .closebtn:hover {
+    color: #ffab57;
+}
+
+
+
+/* Top Navigation */
+
+#topNav {
+    display: inline-flex;
+    align-items: center;
+}
+
+#topNav span {
+    font-size: 30px;
+    cursor: pointer
+}
+
+#topNav .tlink img {
+    margin: 20px 0px 10px 20px;
+    ;
+}
+
+#topNav img {
+    width: 30px;
+}
+
+#topNav input {
+    margin-left: 15px;
+    border-radius: 5px;
+    width: 300px;
+    height: 25px;
+    text-align: center;
+    border-style: none;
+    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.28);
+}
+
+
+/* Main */
+
+#main {
+    transition: margin-left .5s;
+}
+
+
+
+
+/* Header */
+
+.header {
+    padding-left: 50px;
+    padding-top: 5px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 5px;
+    border-style: none;
+    color: #000000;
+    text-shadow: 2px 2px 20px #ffffff, 2px 2px 0px #ffffff;
+    box-shadow: 0px 15px 20px 0px rgba(255, 255, 255, 0.65);
+}
+
+
+
+
+/* Articles container */
+#news {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+.column {
+    flex: 25%;
+    max-width: 25%;
+}
+
+.column .article {}
+
+@media (max-width: 1500px) {
+    .column {
+        flex: 50%;
+        max-width: 50%;
+    }
+
+    #news {
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .column {
+        flex: 100%;
+        max-width: 100%;
+    }
+
+    #topNav input {
+        width: 160px;
+    }
+}
+
+
+
+
+/* Article*/
+#news article {
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0), 0 6px 20px 0 rgb(142, 142, 142);
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    color: white;
+    position: relative;
+}
+
+.article {
+    margin: 10px;
+    background-color: #ffab57;
+    box-shadow: 0px 5px 12px 0 rgb(42, 42, 42);
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+}
+
+.readBtn {
+    background-color: #ffbd0a;
+    box-shadow: 0px 5px 12px 0 rgb(42, 42, 42);
+    border-style: none;
+    width: 90px;
+    height: 30px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    color: #000000;
+
+}
+
+.readBtn:hover {
+    background: #ffbd0a;
+    color: #ffffff;
+    box-shadow: 0px 1px 8px 0 rgb(255, 158, 61);
+}
+
+
+
+
+/* Article holding the image and the text */
+
+.top-left {
+    position: absolute;
+    top: -8px;
+    left: 10px;
+}
+
+.top-left img {
+    width: 60px;
+}
+
+
+
+/* Top right "READ" button */
+.top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    height: 50%;
+}
+
+
+
+/* Bottom panel, containing the title of the article, and a quote or beggining of it */
+.bottom {
+    background-color: rgba(0, 0, 0, 0.78);
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    bottom: 5px;
+}
+
+.bottom h4 {
+    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.bottom p,
+h4 {
+    padding: 10px 2px;
+    margin: 0;
+}
