@@ -24,9 +24,9 @@ echo '</script>';
     <div id="mySidenav" class="sidenav">
         <img src="graphics/logo2.png">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a class="alink" href="#"><img src="graphics/home.png">Home</a>
+        <a class="alink" href="index.php"><img src="graphics/home.png">Home</a>
         <a class="alink" href="#"><img src="graphics/bookmark.png">Bookmarked</a>
-        <a class="alink" href="#"><img src="graphics/add.png">Add Content</a>
+        <a class="alink" href="addcontent.php"><img src="graphics/add.png">Add Content</a>
         <a class="blink" href="#">Categories</a>
         <a class="blink" href="#">Layout</a>
         <a class="blink" href="#">Preferences</a>
