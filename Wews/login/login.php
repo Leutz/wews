@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../database.php';
 
 if(!empty($_POST['email']) && !empty($_POST['password'])):
@@ -10,8 +11,8 @@ if(!empty($_POST['email']) && !empty($_POST['password'])):
   $stmt->execute();
   $valid = $stmt->fetch(PDO::FETCH_ASSOC);
   if ($valid)
-  {echo "<script type='text/javascript'>alert(' Te-ai conectat cu succes')</script>";
-    header('Location: ../index.php');}
+  {$_SESSION['logged']='Succes';
+		echo "<script type='text/javascript'>alert(' Te-ai conectat cu succes');window.location = '../index.php';</script>";}
     else {echo "<script type='text/javascript'>alert('Email sau parola gresita. Incearca iar.')</script>";}
 
 	endif;

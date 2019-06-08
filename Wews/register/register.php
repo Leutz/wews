@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../database.php';
 
 if(!empty($_POST['email']) && !empty($_POST['password'])):
@@ -15,13 +16,13 @@ if(!empty($_POST['email']) && !empty($_POST['password'])):
 		$isvalid = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		if (in_array("1",$isvalid))
-		 {echo "<script type='text/javascript'>alert('submitted successfully!')</script>";}
+		 {	echo "<script type='text/javascript'>alert(' Te-ai inregistrat cu succes. Vei fi redirectionat spre pagina de conectare');window.location = '../login/login.php';</script>";}
 		 else {
 		 echo "<script type='text/javascript'>alert('Emailul nu este valid sau deja exista in baza de date ')</script>";
 		 }
 	}
 	else
-{echo "<script type='text/javascript'>alert('failed')</script>";}
+{echo "<script type='text/javascript'>alert('Nu s-a executat querry-ul.')</script>";}
 	endif;
 ?>
 

@@ -1,3 +1,13 @@
+<?php
+session_start();
+if( !isset( $_SESSION['logged'] ) ) {
+echo '<script type="text/javascript">';
+echo 'alert("Te-ai conectat cu succes! Vei fi redirectionat spre pagina de logare!");';
+echo 'window.location = "login/login.php";';
+echo '</script>';
+}
+
+ ?>
 <!DOCTYPE html>
 <html>
 
@@ -21,6 +31,7 @@
         <a class="blink" href="#">Layout</a>
         <a class="blink" href="#">Preferences</a>
         <a class="blink" href="#">Settings</a>
+        <a class="alink" href="disconnect.php"><img src="graphics/logout.png">Disconnect</a>
     </div>
 
 
@@ -29,7 +40,7 @@
         <div id="topNav">
             <span onclick="openNav()">&#9776; </span>
 
-            <a class="tlink" href="#"><img src="graphics/refresh.png"> </a>
+            <a class="tlink" href="#=" onclick="location.reload(true); return false;"><img src="graphics/refresh.png"> </a>
             <a class="tlink" href="#"><img src="graphics/layout.png"> </a>
             <a class="tlink" href="#"><img src="graphics/search.png"></a>
             <input type="text" placeholder="Search for articles.."><br>
