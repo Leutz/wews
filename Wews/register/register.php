@@ -2,12 +2,13 @@
 session_start();
 require '../database.php';
 
-if(!empty($_POST['email']) && !empty($_POST['password'])):
+if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['name'])):
 	// Enter the new user in the database
-	$sql = "call `register`(:email,:password,@isvalid);";
+	$sql = "call `register`(:email,:password,:name,@isvalid);";
 	$stmt = $conn->prepare($sql);
 	$stmt->bindParam(':email', $_POST['email']);
 	$stmt->bindParam(':password', $_POST['password']);
+	$stmt->bindParam(':name', $_POST['name']);
 
 	if( $stmt->execute() )
 	{$sql = "SELECT @isvalid as valid;";
@@ -48,6 +49,9 @@ if(!empty($_POST['email']) && !empty($_POST['password'])):
 	 <form action="register.php" method="POST" class="container">
 		 	<label for="email"><b>Email</b></label>
 			<input type="text" placeholder="Enter your email" name="email" required>
+
+			<label for="name"><b>Name</b></label>
+			<input type="text" placeholder="Enter your full name" name="name" required>
 
 			<label for="psw"><b>Password</b></label>
 			<input type="password" placeholder="and password" name="password" required>

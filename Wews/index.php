@@ -2,7 +2,7 @@
 session_start();
 if( !isset( $_SESSION['logged'] ) ) {
 echo '<script type="text/javascript">';
-echo 'alert("Te-ai conectat cu succes! Vei fi redirectionat spre pagina de logare!");';
+echo 'alert("Nu esti conectat! Vei fi redirectionat spre pagina de logare!");';
 echo 'window.location = "login/login.php";';
 echo '</script>';
 }
