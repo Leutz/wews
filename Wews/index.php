@@ -107,18 +107,32 @@ echo '</script>';
                   <?php
                   //Print all the entries
                   foreach($entries as $entry){
-
+                    $entry->description=mb_strimwidth($entry->description, 0, 100, ".");
+                    if (!$entry->enclosure['url'])
+                    {$entry->enclosure['url']="graphics/d.jpg";}
                       ?>
 
-
                           <div class="article">
-                                <?php
-                                if($entry->enclosure['url']){?>
                                   <img src="<?= $entry->enclosure['url']?>" alt="Snow" style="width:100%;">
-                                <?php } else {?>
-                                    <img src="graphics/d.jpg" alt="Snow" style="width:100%;">
-                                  <?php }?>
-                                  <div class="top-left"><img src="graphics/bookmark.png"> </div>
+                                  <form method="post">
+                                    <input class="top-left" type="submit" name="bookmark" id="test" value="BOOKMARK"><br/>
+                                  </form>
+                                  <?php
+                                  if(!empty($_POST['bookmark']))
+                                  {
+                                    $sql = "INSERT into articles (id,titlu,link,topic,created_at,updated_at) values (id,:title,:link,:topic,created_at,updated_at)";
+                                    $stmt = $conn->prepare($sql);
+                                    $stmt->bindParam(':title', $entry->title);
+                                    $stmt->bindParam(':link', $entry->link);
+                                    $stmt->bindParam(':topic', $entry->description);
+                                    if($stmt->execute())
+                                    {
+                                    echo '<script type="text/javascript">';
+                                    echo 'alert("Ai adaugat cu succes.");';
+                                    echo '</script>';}
+                                    unset($_POST['bookmark']);
+                                  } ?>
+
                                   <div class="top-right" ><button class="readBtn" onclick="window.open('<?= $entry->link ?>','_blank')"><b>READ</b></button></div>
                                   <div class="bottom">
                                       <h4 id="title"><strong><?= $entry->title ?></strong></h4>
