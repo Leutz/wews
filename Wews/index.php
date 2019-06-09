@@ -53,217 +53,84 @@ echo '</script>';
             <div class="header">
                 <h1>Latest News</h1>
             </div>
+            <?php
+            require 'database.php';
+            $feeds = array();
+            $sql = "call `getUserID`(:email,@userid);";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':email', $_SESSION['email']);
 
-            <!-- Photo Grid -->
-            <div class="row">
-                <div class="column">
+            if( $stmt->execute() )
+            {
+              $sql = "SELECT @userid as useridoutput;";
+              $stmt = $conn->prepare($sql);
+              $stmt->execute();
+              $userid = $stmt->fetchALL(PDO::FETCH_ASSOC);
+              foreach ($userid as $id)
+              { $_SESSION['userid']=$id['useridoutput'];}
+            }
 
-                    <div class="article">
-                        <img src="graphics/rb.gif" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>Antique building crashed after plane landed on it</strong></h4>
-                            <p><i>"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/d.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>GOOGLE'S HUGE UPDATE FOR GOOGLE IMAGES</strong></h4>
-                            <p><i>"CEO of ABC announces huge changes for the entire Google company..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/g.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>CHEAP VACATIONS ARE NOW HUNTED</strong></h4>
-                            <p><i>"Hurry up and get your plane ticket, because you'll regret it later, says AirplaneThatFlies Company ..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/c.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>SPRING AGAIN</strong></h4>
-                            <p><i>"Weow, weeeeow, weoooow..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/g.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>dAMN CAT TURNS AGAINST IT'S OWN KINd</strong></h4>
-                            <p><i>"Weow, weeeeow, weoooow..."</i></p>
-                        </div>
-                    </div>
+            $sql = "SELECT feeds_id from follows where users_id=:uid";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':uid', $_SESSION['userid']);
+            $stmt->execute();
+	          $results = $stmt->fetchALL(PDO::FETCH_ASSOC);
+
+            foreach ($results as $feeds_id)
+              {
+                $sql = "SELECT link from feeds where id=:feeds_id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':feeds_id', $feeds_id['feeds_id']);
+                $stmt->execute();
+    	          $results = $stmt->fetchALL(PDO::FETCH_ASSOC);
+                foreach ($results as $feeds_id)
+                {
+                array_push($feeds,$feeds_id['link']);
+                }
+              }
+
+                  //Read each feed's items
+                  $entries = array();
+                  foreach($feeds as $feed) {
+                      $xml = simplexml_load_file($feed);
+                      $entries = array_merge($entries, $xml->xpath("//item"));
+                  }
+
+                  //Sort feed entries by pubDate
+                  usort($entries, function ($feed1, $feed2) {
+                      return strtotime($feed2->pubDate) - strtotime($feed1->pubDate);
+                  });
+
+                  ?>
+                  <div class="row">
+                    <div class="column">
+                  <?php
+                  //Print all the entries
+                  foreach($entries as $entry){
+
+                      ?>
+
+
+                          <div class="article">
+                                <?php
+                                if($entry->enclosure['url']){?>
+                                  <img src="<?= $entry->enclosure['url']?>" alt="Snow" style="width:100%;">
+                                <?php } else {?>
+                                    <img src="graphics/d.jpg" alt="Snow" style="width:100%;">
+                                  <?php }?>
+                                  <div class="top-left"><img src="graphics/bookmark.png"> </div>
+                                  <div class="top-right" ><button class="readBtn" onclick="window.open('<?= $entry->link ?>','_blank')"><b>READ</b></button></div>
+                                  <div class="bottom">
+                                      <h4 id="title"><strong><?= $entry->title ?></strong></h4>
+                                      <p><i><?= $entry->description ?></i></p>
+                                  </div>
+                              </div>
+
+                      <?php
+                  }
+                  ?>
                 </div>
-
-                <div class="column">
-                    <div class="article">
-                        <img src="graphics/h.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>THIS BIRD CAN SING? PEOPLE ASK</strong></h4>
-                            <p><i>"Neque che io scrir achire..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/e.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>IF YOU SEE THIS ANIMAL, YOU BETTER RUN FOR HIS LIFE</strong></h4>
-                            <p><i>"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/f.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>BEST SPACE PHOTOS YOU'LL EVER SEE</strong></h4>
-                            <p><i>"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/g.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>dAMN CAT TURNS AGAINST IT'S OWN KINd</strong></h4>
-                            <p><i>"Weow, weeeeow, weoooow..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/d.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>dAMN CAT TURNS AGAINST IT'S OWN KINd</strong></h4>
-                            <p><i>"Weow, weeeeow, weoooow..."</i></p>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="column">
-                    <div class="article">
-                        <img src="graphics/d.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>dAMN CAT TURNS AGAINST IT'S OWN KING</strong></h4>
-                            <p><i>"Weow, weeeeow, weoooow..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/g.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>Game Developed By Romanian Team HexaCoin Rocks</strong></h4>
-                            <p><i>"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/rb.png" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>Game Developed By Romanian Team HexaCoin Rocks</strong></h4>
-                            <p><i>"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/rb.png" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>Game Developed By Romanian Team HexaCoin Rocks</strong></h4>
-                            <p><i>"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/g.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>dAMN CAT TURNS AGAINST IT'S OWN KINd</strong></h4>
-                            <p><i>"Weow, weeeeow, weoooow..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/D.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>dAMN CAT TURNS AGAINST IT'S OWN KINd</strong></h4>
-                            <p><i>"Weow, weeeeow, weoooow..."</i></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="article">
-                        <img src="graphics/c.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>With spring coming, the winter is now almost over.</strong></h4>
-                            <p><i>"A spring specialist talks about what danger comes once with the spring, but also, talks about flowers..."</i></p>
-                        </div>
-                    </div>
-
-                    <div class="article">
-                        <img src="graphics/rb.png" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>Game Developed By Romanian Team HexaCoin Rocks</strong></h4>
-                            <p><i>"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/b.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>dAMN CAT TURNS AGAINST IT'S OWN KING</strong></h4>
-                            <p><i>"Weow, weeeeow, weoooow..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/g.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>dAMN CAT TURNS AGAINST IT'S OWN KINd</strong></h4>
-                            <p><i>"Weow, weeeeow, weoooow..."</i></p>
-                        </div>
-                    </div>
-                    <div class="article">
-                        <img src="graphics/g.jpg" alt="Snow" style="width:100%;">
-                        <div class="top-left"><img src="graphics/bookmark.png"> </div>
-                        <div class="top-right"><button class="readBtn"><b>READ</b></button></div>
-                        <div class="bottom">
-                            <h4 id="title"><strong>dAMN CAT TURNS AGAINST IT'S OWN KINd</strong></h4>
-                            <p><i>"Weow, weeeeow, weoooow..."</i></p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
+               </div>
 
         </div>
 

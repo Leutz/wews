@@ -55,8 +55,8 @@
               		$stmt = $conn->prepare($sql);
               		$stmt->execute();
               		$userid = $stmt->fetchALL(PDO::FETCH_ASSOC);
-                  foreach ($userid as $songs)
-                  { $_SESSION['userid']=$songs['useridoutput'];}
+                  foreach ($userid as $id)
+                  { $_SESSION['userid']=$id['useridoutput'];}
 
 	                 $records = $conn->prepare('SELECT feeds_id FROM follows where users_id=:users_id');
                    $records->bindParam(':users_id', $_SESSION['userid']);
@@ -73,7 +73,7 @@
                       foreach ($results as $links)
                       {
 	                       echo $links['link'];
-	                        echo "/<br>";
+	                        echo "</br>";
                       }
                       }
                   }
@@ -92,8 +92,12 @@ else {
             </form>
             <?php
 
-            if(!empty($_POST['site'])):
-
+            if(!empty($_POST['site'])){
+              if(strpos(file_get_contents($_POST['site']),'<?xml')===false) {
+                  echo "<script type='text/javascript'>alert('Link-ul nu este validat ca fiinds de tip RSS FEED')</script>";
+              }
+              else
+              {
               $sql = "call `addfeed`(:site,:email);";
             	$stmt = $conn->prepare($sql);
             	$stmt->bindParam(':email', $_SESSION['email']);
@@ -101,9 +105,16 @@ else {
               if ($stmt->execute())
               { echo "<script type='text/javascript'>alert(' Ai adaugat cu succes');window.location = 'addcontent.php';</script>";}
                 else {echo "<script type='text/javascript'>alert('S-a intamplat ceva. Incearca iar')</script>";}
-
-             endif;
+              }
+           }
             ?>
+
+            <form action="deletefeed.php" method="POST" class="container">
+            <label for="site"><b style="">Delete</b></label>
+            <input type="text" placeholder="Enter site" name="site" required>
+            <input type="submit" class="loginbtn" value="Delete">
+            </form>
+
 
         </div>
 
