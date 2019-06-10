@@ -1,5 +1,5 @@
 function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenav").style.width = "275px";
     if (innerWidth > 1200) {
         document.getElementById("main").style.marginLeft = "250px";
     }
@@ -15,10 +15,10 @@ function myAccFunc() {
   var x = document.getElementById("demoAcc");
   if (x.className.indexOf("w3-show") == -1) {
     x.className += " w3-show";
-    x.previousElementSibling.className += " w3-green";
+    x.previousElementSibling.className += " w3-white";
   } else {
     x.className = x.className.replace(" w3-show", "");
     x.previousElementSibling.className =
-    x.previousElementSibling.className.replace(" w3-green", "");
+    x.previousElementSibling.className.replace(" w3-white", "");
   }
 }

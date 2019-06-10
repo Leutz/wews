@@ -59,7 +59,7 @@ echo '</script>';
                  list(,$var,) = explode('//', $userfeeds);
                  list($var,) = explode('/', $var);
                  ?>
-                    <a href="getfeed.php?caller=<?=$var?>" class="blink"><?= $var ?></a>
+                    <a href="getfeed.php?caller=<?=$var?>" class="clink"><?= $var ?></a>
                   <?php
                    }
                 ?>
@@ -135,6 +135,7 @@ echo '</script>';
                       }
 
                       ?>
+
 
                           <div class="article">
                                   <img src="<?= $image?>" alt="Snow" style="width:100%;">
