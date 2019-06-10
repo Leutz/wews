@@ -22,3 +22,12 @@ function myAccFunc() {
     x.previousElementSibling.className.replace(" w3-white", "");
   }
 }
+
+$(window).load(function() {
+  $('.post-module').hover(function() {
+    $(this).find('.description').stop().animate({
+      height: "toggle",
+      opacity: "toggle"
+    }, 300);
+  });
+});

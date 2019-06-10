@@ -119,8 +119,6 @@ echo '</script>';
                   });
 
                   ?>
-                  <div class="row">
-                    <div class="column">
                   <?php
                   //Print all the entries
                   foreach($entries as $entry){
@@ -136,26 +134,37 @@ echo '</script>';
 
                       ?>
 
-
-                          <div class="article">
-                                  <img src="<?= $image?>" alt="Snow" style="width:100%;">
-                                  <div class="top-left">
-                                    <button class="readBtn"><a href="addbookmark.php?link=<?= $entry->link ?>&title=<?= $entry->title?>&description=<?= $entry->description?>">Bookmark</a></button>
-                                  </div>
-                                  <div class="top-right" >
-                                    <button class="readBtn" onclick="window.open('<?= $entry->link ?>','_blank')"><b>READ</b></button>
-                                  </div>
-                                  <div class="bottom">
-                                      <h6 id="title"><strong><span style="color: white; font-size: 15px;"><?= $entry->title ?></span></strong></h6>
-                                      <i><span style="color: white; font-size: 13px;"><?= $entry->description ?></span></i>
-                                  </div>
-                              </div>
+<div class="group">
+    <div class="container">
+      <!-- Normal Demo-->
+      
+        <!-- Post-->
+        <div class="post-module">
+          <!-- Thumbnail-->
+          <div class="thumbnail">
+            <div class="date">
+              <div><?= $entry->category ?></div>
+            
+            </div><img src="<?= $image?>" alt="Snow"/>
+          </div>
+          <!-- Post Content-->
+          <div class="post-content">
+            <div class="rb"><button class="readBtn" onclick="window.open('<?= $entry->link ?>','_blank')"><b>READ</b></button></div>
+            <div class="bb"><button class="readBtn"><a href="addbookmark.php?link=<?= $entry->link ?>&title=<?= $entry->title?>&description=<?= $entry->description?>">Bookmark</a></button></div>
+            <h1 class="title"><strong><span><?= $entry->title ?></span></strong></h1>
+            <p class="description"><?= $entry->description ?>..</p>
+            <div class="post-meta"><span class="timestamp"><?= $entry->pubDate ?></span><span class="comments"><i class="fa fa-comments"></i></span></div>
+          </div>
+        </div>
+    
+      
+    </div>
+</div>
 
                       <?php
                   }
                   ?>
-                </div>
-               </div>
+              
 
         </div>
 

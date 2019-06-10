@@ -171,8 +171,6 @@ body {
     max-width: 25%;
 }
 
-.column .article {}
-
 @media (max-width: 1500px) {
     .column {
         flex: 50%;

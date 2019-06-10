@@ -55,7 +55,7 @@
 
 
             <div class="header">
-                <h1>Latest News</h1>
+                <h1>Bookmarked</h1>
             </div>
             <div class="row">
               <div class="column">
@@ -81,6 +81,33 @@
 
               ?>
 
+
+<div class="group">
+    <div class="container">
+      <!-- Normal Demo-->
+      
+        <!-- Post-->
+        <div class="post-module">
+          <!-- Thumbnail-->
+          <div class="thumbnail">
+            <div class="date">
+            
+            </div><img src="graphics/d.jpg" alt="Snow"/>
+          </div>
+          <!-- Post Content-->
+          <div class="post-content">
+            <div class="rb"><button class="readBtn" onclick="window.open('<?= $articles['link'] ?>','_blank')"><b>READ</b></button></div>
+            <h1 class="title"><strong><span><?= $articles['titlu'] ?></span></strong></h1>
+            <p class="description"><?= $articles['topic'] ?>..</p>
+           
+          </div>
+        </div>
+    
+      
+    </div>
+</div>
+
+<!--
                           <div class="article">
                                   <img src="graphics/d.jpg" alt="Snow" style="width:100%;">
                                   <div class="top-right" ><button class="readBtn" onclick="window.open('<?= $articles['link'] ?>','_blank')"><b>READ</b></button></div>
@@ -89,7 +116,7 @@
                                       <i><span style="color: white; font-size: 13px;"><?= $articles['topic'] ?></span></i>
                                   </div>
                               </div>
-
+                -->
                       <?php
                 }
               }
