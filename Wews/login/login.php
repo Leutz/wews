@@ -13,10 +13,24 @@ if(!empty($_POST['email']) && !empty($_POST['password'])):
   if ($valid)
   {	$_SESSION['logged']='Succes';
 		$_SESSION['email']=$_POST['email'];
+
+		$sql = "call `getUserID`(:email,@userid);";
+		$stmt = $conn->prepare($sql);
+		$stmt->bindParam(':email', $_POST['email']);
+		if( $stmt->execute() )
+		{$sql = "SELECT @userid as useridoutput;";
+			$stmt = $conn->prepare($sql);
+			$stmt->execute();
+			$userid = $stmt->fetchALL(PDO::FETCH_ASSOC);
+			foreach ($userid as $id)
+			{ $_SESSION['userid']=$id['useridoutput'];}
+		}
 		echo "<script type='text/javascript'>alert(' Te-ai conectat cu succes');window.location = '../index.php';</script>";}
     else {echo "<script type='text/javascript'>alert('Email sau parola gresita. Incearca iar.')</script>";}
 
 	endif;
+
+
 ?>
 
 

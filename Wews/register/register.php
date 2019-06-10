@@ -2,9 +2,10 @@
 session_start();
 require '../database.php';
 
+
 if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['name'])):
 	// Enter the new user in the database
-	$sql = "call `register`(:email,:password,:name,@isvalid);";
+	$sql = "call register(:email,:password,:name,@isvalid)";
 	$stmt = $conn->prepare($sql);
 	$stmt->bindParam(':email', $_POST['email']);
 	$stmt->bindParam(':password', $_POST['password']);
