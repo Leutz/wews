@@ -2,11 +2,11 @@
 session_start();
 require 'database.php';
 
-if(!empty($_POST['site']) && !empty($_SESSION['userid']))
+if(isset($_GET['link']) && !empty($_SESSION['userid']))
 {
   $sql="SELECT id FROM feeds where link=:site_link";
   $records = $conn->prepare($sql);
-  $records->bindParam(':site_link',$_POST['site']);
+  $records->bindParam(':site_link',$_GET['link']);
   $records->execute();
   $results = $records->fetchALL(PDO::FETCH_ASSOC);
 

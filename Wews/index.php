@@ -137,34 +137,34 @@ echo '</script>';
 <div class="group">
     <div class="container">
       <!-- Normal Demo-->
-      
+
         <!-- Post-->
         <div class="post-module">
           <!-- Thumbnail-->
           <div class="thumbnail">
             <div class="date">
               <div><?= $entry->category ?></div>
-            
+
             </div><img src="<?= $image?>" alt="Snow"/>
           </div>
           <!-- Post Content-->
           <div class="post-content">
             <div class="rb"><button class="readBtn" onclick="window.open('<?= $entry->link ?>','_blank')"><b>READ</b></button></div>
             <div class="bb"><button class="readBtn"><a href="addbookmark.php?link=<?= $entry->link ?>&title=<?= $entry->title?>&description=<?= $entry->description?>">Bookmark</a></button></div>
-            <h1 class="title"><strong><span><?= $entry->title ?></span></strong></h1>
+            <h3 class="title"><strong><span><?= $entry->title ?></span></strong></h3>
             <p class="description"><?= $entry->description ?>..</p>
             <div class="post-meta"><span class="timestamp"><?= $entry->pubDate ?></span><span class="comments"><i class="fa fa-comments"></i></span></div>
           </div>
         </div>
-    
-      
+
+
     </div>
 </div>
 
                       <?php
                   }
                   ?>
-              
+
 
         </div>
 

@@ -49,6 +49,11 @@
                       foreach ($results as $links)
                       {
 	                       echo $links['link'];
+                         ?>
+
+                             <a href="deletefeed.php?link=<?= $links['link'] ?>"><img src="graphics/delete.jfif" height="20" width="20"></a>
+
+                         <?php
 	                        echo "</br>";
                           array_push($_SESSION['feeds'],$links['link']);
                       }
@@ -86,14 +91,6 @@ else {
               }
            }
             ?>
-
-            <form action="deletefeed.php" method="POST" class="container">
-            <label for="site"><b style="">Delete</b></label>
-            <input type="text" placeholder="Enter site" name="site" required>
-            <input type="submit" class="loginbtn" value="Delete">
-            </form>
-
-
         </div>
 
     </div>

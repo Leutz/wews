@@ -70,7 +70,7 @@
             $results = $stmt->fetchALL(PDO::FETCH_ASSOC);
             foreach ($results as $articles_id)
             {
-              $sql = "SELECT titlu,link,topic from articles where id=:articles_id";
+              $sql = "SELECT id,titlu,link,topic from articles where id=:articles_id";
               $stmt = $conn->prepare($sql);
               $stmt->bindParam(':articles_id', $articles_id['articles_id']);
               $stmt->execute();
@@ -85,25 +85,26 @@
 <div class="group">
     <div class="container">
       <!-- Normal Demo-->
-      
+
         <!-- Post-->
         <div class="post-module">
           <!-- Thumbnail-->
           <div class="thumbnail">
             <div class="date">
-            
+
             </div><img src="graphics/d.jpg" alt="Snow"/>
           </div>
           <!-- Post Content-->
           <div class="post-content">
             <div class="rb"><button class="readBtn" onclick="window.open('<?= $articles['link'] ?>','_blank')"><b>READ</b></button></div>
+            <div class="bb"><button class="readBtn"><a href="deletebookmark.php?article_id=<?= $articles['id'] ?>">Delete</a></button></div>
             <h1 class="title"><strong><span><?= $articles['titlu'] ?></span></strong></h1>
             <p class="description"><?= $articles['topic'] ?>..</p>
-           
+
           </div>
         </div>
-    
-      
+
+
     </div>
 </div>
 
