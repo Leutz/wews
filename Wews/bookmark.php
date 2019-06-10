@@ -57,66 +57,42 @@
             <div class="header">
                 <h1>Latest News</h1>
             </div>
+            <div class="row">
+              <div class="column">
             <?php
             require 'database.php';
-            $feeds = array();
-
-
-            if(isset($_SESSION['userid'])  && isset( $_GET["caller"] ))
-          {
-            $sql = "SELECT link from feeds where INSTR(link,:substr)>0";
+            if (isset($_SESSION['userid']))
+            {
+            $sql = "SELECT articles_id from saves where users_id=:users_id";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':substr', $_GET['caller']);
+            $stmt->bindParam(':users_id', $_SESSION['userid']);
             $stmt->execute();
             $results = $stmt->fetchALL(PDO::FETCH_ASSOC);
-            foreach ($results as $feeds_id)
+            foreach ($results as $articles_id)
             {
-            array_push($feeds,$feeds_id['link']);
-            }
-                  //Read each feed's items
-                  $entries = array();
-                  foreach($feeds as $feed) {
-                      $xml = simplexml_load_file($feed);
-                      $entries = array_merge($entries, $xml->xpath("//item"));
-                  }
+              $sql = "SELECT titlu,link,topic from articles where id=:articles_id";
+              $stmt = $conn->prepare($sql);
+              $stmt->bindParam(':articles_id', $articles_id['articles_id']);
+              $stmt->execute();
+              $results2 = $stmt->fetchALL(PDO::FETCH_ASSOC);
 
-                  //Sort feed entries by pubDate
-                  usort($entries, function ($feed1, $feed2) {
-                      return strtotime($feed2->pubDate) - strtotime($feed1->pubDate);
-                  });
+              foreach ($results2 as $articles)
+                {
 
-                  ?>
-                  <div class="row">
-                    <div class="column">
-                  <?php
-                  //Print all the entries
-                  foreach($entries as $entry){
-                    $entry->description=mb_strimwidth($entry->description, 0, 100, ".");
-                    if ($entry->enclosure['url']){
-                      $image=$entry->enclosure['url'];
-                      if(strpos($image, '.mp4') !== false)
-                        {$image ="graphics/d.jpg";}
-                      }
-                      else {
-                        $image ="graphics/d.jpg";
-                      }
-
-                      ?>
+              ?>
 
                           <div class="article">
-                                  <img src="<?= $image?>" alt="Snow" style="width:100%;">
-                                  <div class="top-left">
-                                    <button class="readBtn"><a href="addbookmark.php?link=<?= $entry->link ?>&title=<?= $entry->title?>&description=<?= $entry->description?>">Bookmark</a></button>
-                                  </div>
-                                  <div class="top-right" ><button class="readBtn" onclick="window.open('<?= $entry->link ?>','_blank')"><b>READ</b></button></div>
+                                  <img src="graphics/d.jpg" alt="Snow" style="width:100%;">
+                                  <div class="top-right" ><button class="readBtn" onclick="window.open('<?= $articles['link'] ?>','_blank')"><b>READ</b></button></div>
                                   <div class="bottom">
-                                      <h6 id="title"><strong><span style="color: white; font-size: 15px;"><?= $entry->title ?></span></strong></h6>
-                                      <i><span style="color: white; font-size: 13px;"><?= $entry->description ?></span></i>
+                                      <h6 id="title"><strong><span style="color: white; font-size: 15px;"><?= $articles['titlu'] ?></span></strong></h6>
+                                      <i><span style="color: white; font-size: 13px;"><?= $articles['topic'] ?></span></i>
                                   </div>
                               </div>
 
                       <?php
-                  }
+                }
+              }
                 }
                   ?>
                 </div>

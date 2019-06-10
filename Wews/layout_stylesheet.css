@@ -251,8 +251,8 @@ body {
 
 .top-left {
     position: absolute;
-    top: -8px;
-    left: 10px;
+    top: 0px;
+    left: 0px;
 }
 
 .top-left img {

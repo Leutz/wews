@@ -28,6 +28,7 @@ echo '</script>';
         <img src="graphics/logo2.png">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a class="alink" href="index.php"><img src="graphics/home.png">Home</a>
+        <a class="alink" href="bookmark.php"><img src="graphics/bookmark.png">Bookmarks</a>
         <a class="alink" href="addcontent.php"><img src="graphics/add.png">Add Content</a>
         <a class="alink" onclick="myAccFunc()"><img src="graphics/add.png"> Follows </a>
              <div id="demoAcc" class="w3-hide">
@@ -137,7 +138,12 @@ echo '</script>';
 
                           <div class="article">
                                   <img src="<?= $image?>" alt="Snow" style="width:100%;">
-                                  <div class="top-right" ><button class="readBtn" onclick="window.open('<?= $entry->link ?>','_blank')"><b>READ</b></button></div>
+                                  <div class="top-left">
+                                    <button class="readBtn"><a href="addbookmark.php?link=<?= $entry->link ?>&title=<?= $entry->title?>&description=<?= $entry->description?>">Bookmark</a></button>
+                                  </div>
+                                  <div class="top-right" >
+                                    <button class="readBtn" onclick="window.open('<?= $entry->link ?>','_blank')"><b>READ</b></button>
+                                  </div>
                                   <div class="bottom">
                                       <h6 id="title"><strong><span style="color: white; font-size: 15px;"><?= $entry->title ?></span></strong></h6>
                                       <i><span style="color: white; font-size: 13px;"><?= $entry->description ?></span></i>
