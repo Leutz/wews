@@ -262,10 +262,22 @@ body {
     font-weight: 600;
     text-transform: uppercase;
   }
+
   .post-module .post-content .bb {
     position: absolute;
     top: -35px;
     left: 120px;
+    background: #e74c3c;
+    padding: 0px;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  .post-module .post-content .sh {
+    position: absolute;
+    top: -35px;
+    left: 230px;
     background: #e74c3c;
     padding: 0px;
     color: #FFFFFF;

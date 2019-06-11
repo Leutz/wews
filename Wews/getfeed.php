@@ -36,7 +36,6 @@
                 }
                 ?>
              </div>
-        <a class="alink" href="settings.php"><img src="graphics/settings.png">Settings</a>
         <a class="alink" href="disconnect.php"><img src="graphics/logout.png">Disconnect</a>
     </div>
 
@@ -103,31 +102,32 @@
 
                       ?>
 
-                         
+
 <div class="group">
     <div class="container">
       <!-- Normal Demo-->
-      
+
         <!-- Post-->
         <div class="post-module">
           <!-- Thumbnail-->
           <div class="thumbnail">
             <div class="date">
               <div><?= $entry->category ?></div>
-            
+
             </div><img src="<?= $image?>" alt="Snow"/>
           </div>
           <!-- Post Content-->
           <div class="post-content">
             <div class="rb"><button class="readBtn" onclick="window.open('<?= $entry->link ?>','_blank')"><b>READ</b></button></div>
             <div class="bb"><button class="readBtn"><a href="addbookmark.php?link=<?= $entry->link ?>&title=<?= $entry->title?>&description=<?= $entry->description?>">Bookmark</a></button></div>
+            <div class="sh"><button class="readBtn" onclick="window.open('http://www.facebook.com/sharer.php?u=<?= $entry->link?>','_blank')"><b>Share</b></button></div>
             <h1 class="title"><strong><span><?= $entry->title ?></span></strong></h1>
             <p class="description"><?= $entry->description ?>..</p>
             <div class="post-meta"><span class="timestamp"><?= $entry->pubDate ?></span><span class="comments"><i class="fa fa-comments"></i></span></div>
           </div>
         </div>
-    
-      
+
+
     </div>
 </div>
 

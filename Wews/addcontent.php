@@ -114,7 +114,6 @@ else {
                 ?>
 
              </div>
-        <a class="alink" href="settings.php"><img src="graphics/settings.png">Settings</a>
         <a class="alink" href="disconnect.php"><img src="graphics/logout.png">Disconnect</a>
     </div>
 

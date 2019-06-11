@@ -36,7 +36,6 @@
                 }
                 ?>
              </div>
-        <a class="alink" href="settings.php"><img src="graphics/settings.png">Settings</a>
         <a class="alink" href="disconnect.php"><img src="graphics/logout.png">Disconnect</a>
     </div>
 
@@ -98,6 +97,7 @@
           <div class="post-content">
             <div class="rb"><button class="readBtn" onclick="window.open('<?= $articles['link'] ?>','_blank')"><b>READ</b></button></div>
             <div class="bb"><button class="readBtn"><a href="deletebookmark.php?article_id=<?= $articles['id'] ?>">Delete</a></button></div>
+            <div class="sh"><button class="readBtn" onclick="window.open('http://www.facebook.com/sharer.php?u=<?= $entry->link?>','_blank')"><b>Share</b></button></div>
             <h1 class="title"><strong><span><?= $articles['titlu'] ?></span></strong></h1>
             <p class="description"><?= $articles['topic'] ?>..</p>
 
